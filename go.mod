@@ -3,11 +3,12 @@ module github.com/rudderlabs/sql-tunnels
 go 1.18
 
 require (
-	github.com/ClickHouse/clickhouse-go/v2 v2.4.2
+	github.com/ClickHouse/clickhouse-go/v2 v2.4.3
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/lib/pq v1.10.7
+	github.com/rudderlabs/compose-test v0.0.0-20221205185752-1290775b38f6
 	github.com/stretchr/testify v1.8.1
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+	golang.org/x/crypto v0.3.0
 )
 
 require (
@@ -26,6 +27,6 @@ require (
 	github.com/shopspring/decimal v1.3.1 // indirect
 	go.opentelemetry.io/otel v1.11.1 // indirect
 	go.opentelemetry.io/otel/trace v1.11.1 // indirect
-	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8 // indirect
+	golang.org/x/sys v0.3.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
