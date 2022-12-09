@@ -163,7 +163,7 @@ func (ec *ErrorCombiner) Combine(err error) {
 func (ec *ErrorCombiner) Error() string {
 	err := ""
 	for _, e := range *ec {
-		err += fmt.Sprintf("%s", e.Error())
+		err += e.Error()
 	}
 	return err
 }
