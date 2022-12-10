@@ -3,7 +3,6 @@ package ssh_test
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"os"
 	"testing"
 	"time"
@@ -13,44 +12,9 @@ import (
 	_ "github.com/lib/pq"
 	sshdriver "github.com/rudderlabs/sql-tunnels/driver/ssh"
 	"github.com/stretchr/testify/require"
-	"golang.org/x/crypto/ssh"
 
 	"github.com/rudderlabs/compose-test/testcompose"
 )
-
-func pingSSH(t *testing.T, dest string, config sshdriver.Config) error {
-	t.Helper()
-
-	singer, err := ssh.ParsePrivateKey(config.PrivateKey)
-	if err != nil {
-		return fmt.Errorf("test: parsing private key: %s", err.Error())
-	}
-
-	client, err := ssh.Dial(
-		"tcp",
-		fmt.Sprintf("%s:%d", config.Host, config.Port),
-		&ssh.ClientConfig{
-			User:            config.User,
-			Auth:            []ssh.AuthMethod{ssh.PublicKeys(singer)},
-			HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-			BannerCallback:  ssh.BannerDisplayStderr(),
-		},
-	)
-	if err != nil {
-		return fmt.Errorf("test: ssh dialing: %s", err.Error())
-	}
-	defer client.Close()
-
-	t.Log(client.ServerVersion())
-
-	conn, err := client.Dial("tcp", dest)
-	if err != nil {
-		return fmt.Errorf("test: connection %q dialing: %s", dest, err.Error())
-	}
-	defer conn.Close()
-
-	return nil
-}
 
 func TestConnections(t *testing.T) {
 	t.Parallel()
@@ -85,16 +49,19 @@ func TestConnections(t *testing.T) {
 		err = db.PingContext(ctx)
 		require.NoError(t, err)
 
+		row := db.QueryRowContext(ctx, "SELECT 1")
+		require.NoError(t, row.Err())
+
+		var one int
+		err = row.Scan(&one)
+		require.NoError(t, err)
+		require.Equal(t, 1, one)
+
 		err = db.Close()
 		require.NoError(t, err)
 	})
 
 	t.Run("clickhouse", func(t *testing.T) {
-		// FIXME: hack to wait for clickhouse to be ready
-		require.Eventually(t, func() bool {
-			return pingSSH(t, "db_clickhouse:9000", config) == nil
-		}, time.Minute, time.Second)
-
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 		defer cancel()
 
@@ -104,8 +71,20 @@ func TestConnections(t *testing.T) {
 		db, err := sql.Open("sql+ssh", encoded)
 		require.NoError(t, err)
 
+		require.Eventually(t, func() bool {
+			return db.PingContext(ctx) == nil
+		}, time.Minute, time.Second)
+
 		err = db.PingContext(ctx)
 		require.NoError(t, err)
+
+		row := db.QueryRowContext(ctx, "SELECT 1")
+		require.NoError(t, row.Err())
+
+		var one int
+		err = row.Scan(&one)
+		require.NoError(t, err)
+		require.Equal(t, 1, one)
 
 		err = db.Close()
 		require.NoError(t, err)

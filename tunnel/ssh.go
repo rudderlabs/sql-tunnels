@@ -1,7 +1,7 @@
 package tunnel
 
 import (
-	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net"
@@ -28,10 +28,8 @@ type SSH struct {
 	sshClient   *ssh.Client
 	remoteAddr  string
 
-	err error
-
-	cancel context.CancelFunc
-	ctx    context.Context
+	err   error
+	errMu sync.Mutex
 
 	backgroundWG sync.WaitGroup
 }
@@ -62,8 +60,6 @@ func Listen(config *SSHConfig) (*SSH, error) {
 		return nil, fmt.Errorf("listening on %s://%s: %w", "tcp", listener.Addr().String(), err)
 	}
 
-	bgCtx, bgCancel := context.WithCancel(context.Background())
-
 	tunnel := &SSH{
 		localServer: listener,
 		sshClient:   sshClient,
@@ -71,8 +67,6 @@ func Listen(config *SSHConfig) (*SSH, error) {
 			config.RemoteHost,
 			strconv.Itoa(config.RemotePort),
 		),
-		ctx:    bgCtx,
-		cancel: bgCancel,
 	}
 
 	go tunnel.listen()
@@ -85,12 +79,14 @@ func (t *SSH) Addr() string {
 }
 
 func (t *SSH) Error() error {
+	t.errMu.Lock()
+	defer t.errMu.Unlock()
+
 	return t.err
 }
 
 func (tunnel *SSH) Close() error {
 	_ = tunnel.localServer.Close()
-	tunnel.cancel()
 	err := tunnel.sshClient.Close()
 	tunnel.backgroundWG.Wait()
 	return err
@@ -101,47 +97,65 @@ func (t *SSH) listen() {
 	defer t.backgroundWG.Done()
 
 	for {
-		conn, err := t.localServer.Accept()
-		if err != nil {
-			fmt.Printf("accepting connection errored out: %s", err.Error())
+		localConn, err := t.localServer.Accept()
+		if errors.Is(err, net.ErrClosed) {
 			return
+		}
+		if err != nil {
+			t.errMu.Lock()
+			t.err = err
+			t.errMu.Unlock()
+			return
+		}
+
+		remoteConn, err := t.sshClient.Dial("tcp", t.remoteAddr)
+		if err != nil {
+			t.errMu.Lock()
+			t.err = err
+			t.errMu.Unlock()
+
+			localConn.Close()
+			continue
 		}
 
 		t.backgroundWG.Add(1)
 		go func() {
 			defer t.backgroundWG.Done()
 
-			t.err = t.forward(conn)
+			err := t.forward(localConn, remoteConn)
+			if err != nil {
+				t.errMu.Lock()
+				t.err = fmt.Errorf("forwarding: %w", err)
+				t.errMu.Unlock()
+			}
 		}()
 	}
 }
 
-func (t *SSH) forward(localConn net.Conn) error {
+func (t *SSH) forward(localConn, remoteConn net.Conn) error {
 	defer localConn.Close()
-
-	remoteConn, err := t.sshClient.Dial("tcp", t.remoteAddr)
-	if err != nil {
-		return err
-	}
+	defer remoteConn.Close()
 
 	g := errgroup.Group{}
 	g.Go(func() error {
-		_, err = io.Copy(remoteConn, localConn)
+		defer remoteConn.Close()
+
+		_, err := io.Copy(remoteConn, localConn)
 		if err != nil {
 			return err
 		}
+
 		return nil
 	})
 	g.Go(func() error {
-		_, err = io.Copy(localConn, remoteConn)
+		defer localConn.Close()
+
+		_, err := io.Copy(localConn, remoteConn)
 		if err != nil {
 			return err
 		}
 		return nil
 	})
-
-	<-t.ctx.Done()
-	remoteConn.Close()
 
 	return g.Wait()
 }
