@@ -73,7 +73,7 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			PrivateKey: privateKey,
 		}
 
-		sshTunnel, err := tunnel.Listen(&config)
+		sshTunnel, err := tunnel.ListenAndForward(&config)
 		require.EqualError(t, err, "parsing private key: ssh: no key found")
 		require.Nil(t, sshTunnel)
 	})
@@ -90,7 +90,7 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			PrivateKey: privateKey,
 		}
 
-		sshTunnel, err := tunnel.Listen(&config)
+		sshTunnel, err := tunnel.ListenAndForward(&config)
 
 		require.EqualError(t, err, fmt.Sprintf("server \"127.0.0.1:%d\" dial error: dial tcp 127.0.0.1:%d: connect: connection refused", port, port))
 		require.Nil(t, sshTunnel)
@@ -112,7 +112,7 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			RemotePort: port,
 		}
 
-		sshTunnel, err := tunnel.Listen(&config)
+		sshTunnel, err := tunnel.ListenAndForward(&config)
 		require.NoError(t, err)
 
 		t.Cleanup(func() {
@@ -157,7 +157,7 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			RemotePort: echo.Addr().(*net.TCPAddr).Port,
 		}
 
-		sshTunnel, err := tunnel.Listen(&config)
+		sshTunnel, err := tunnel.ListenAndForward(&config)
 		require.NoError(t, err)
 
 		t.Cleanup(func() {
@@ -213,7 +213,7 @@ func Test_SSH_ListenAndForward_NetworkFailure(t *testing.T) {
 		RemotePort: echo.Addr().(*net.TCPAddr).Port,
 	}
 
-	sshTunnel, err := tunnel.Listen(&config)
+	sshTunnel, err := tunnel.ListenAndForward(&config)
 	require.NoError(t, err)
 
 	defer goleak.VerifyNone(t, goleak.IgnoreCurrent())

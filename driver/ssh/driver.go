@@ -64,7 +64,7 @@ func (driver *Driver) OpenConnector(name string) (driver.Connector, error) {
 		RemotePort: remotePort,
 	}
 
-	t, err := tunnel.Listen(config)
+	t, err := tunnel.ListenAndForward(config)
 	if err != nil {
 		return nil, fmt.Errorf("creating instance of tunnel: %w", err)
 	}

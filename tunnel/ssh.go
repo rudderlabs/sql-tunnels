@@ -34,7 +34,7 @@ type SSH struct {
 	backgroundWG sync.WaitGroup
 }
 
-func Listen(config *SSHConfig) (*SSH, error) {
+func ListenAndForward(config *SSHConfig) (*SSH, error) {
 	singer, err := ssh.ParsePrivateKey(config.PrivateKey)
 	if err != nil {
 		return nil, fmt.Errorf("parsing private key: %s", err.Error())
@@ -85,10 +85,10 @@ func (t *SSH) Error() error {
 	return t.err
 }
 
-func (tunnel *SSH) Close() error {
-	_ = tunnel.localServer.Close()
-	err := tunnel.sshClient.Close()
-	tunnel.backgroundWG.Wait()
+func (t *SSH) Close() error {
+	_ = t.localServer.Close()
+	err := t.sshClient.Close()
+	t.backgroundWG.Wait()
 	return err
 }
 
@@ -133,9 +133,6 @@ func (t *SSH) listen() {
 }
 
 func (t *SSH) forward(localConn, remoteConn net.Conn) error {
-	defer localConn.Close()
-	defer remoteConn.Close()
-
 	g := errgroup.Group{}
 	g.Go(func() error {
 		defer remoteConn.Close()
