@@ -11,7 +11,6 @@ import (
 	"sync"
 
 	"github.com/rudderlabs/sql-tunnels/tunnel"
-	stunnel "github.com/rudderlabs/sql-tunnels/tunnel/ssh"
 )
 
 // sql -> Open(name)-> conn
@@ -56,78 +55,59 @@ func (driver *Driver) OpenConnector(name string) (driver.Connector, error) {
 
 	remotePort, _ := strconv.Atoi(remoteParsed.Port())
 	// Setup the tunnel config from the ssh config.
-	config := &stunnel.SSHTunnelConfig{
-		SshUser:    sshConfig.User,
-		SshHost:    sshConfig.Host,
-		SshPort:    sshConfig.Port,
+	config := &tunnel.SSHConfig{
+		User:       sshConfig.User,
+		Host:       sshConfig.Host,
+		Port:       sshConfig.Port,
 		PrivateKey: sshConfig.PrivateKey,
 		RemoteHost: remoteParsed.Hostname(),
 		RemotePort: remotePort,
-		LocalPort:  0,
 	}
 
-	fmt.Println()
-
-	t, err := stunnel.NewSSHTunnel(config)
+	t, err := tunnel.ListenAndForward(config)
 	if err != nil {
 		return nil, fmt.Errorf("creating instance of tunnel: %w", err)
 	}
 
+	var host, port string
+	host, port, err = net.SplitHostPort(t.Addr())
+	if err != nil {
+		return nil, err
+	}
+
 	return &Connector{
-		Tunnel: t,
-		dsn:    remoteHostDSN,
+		tunnel:   t,
+		dsn:      remoteHostDSN,
+		localDSN: replaceHostPort(remoteHostDSN, host, port),
 	}, nil
 }
 
 type Connector struct {
-	sync.Once
-	dsn string
-	db  *sql.DB
-	tunnel.Tunnel
+	dsn      string
+	db       *sql.DB
+	tunnel   *tunnel.SSH
 	localDSN string
+
+	mu sync.Mutex
 }
 
 func (c *Connector) Connect(ctx context.Context) (driver.Conn, error) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
 	var err error
 
-	// Once we, need to open the tunnel and return the connection
-	// to the underlying warehouse.
-	c.Once.Do(func() {
-		fmt.Println("opening the tunnel only once")
-
-		err = c.Tunnel.Open(ctx)
-		if err != nil {
-			return
-		}
-
-		var host, port string
-		host, port, err = net.SplitHostPort(c.Tunnel.LocalConnectionString())
-		if err != nil {
-			return
-		}
-		c.localDSN = replaceHostPort(c.dsn, host, port)
-
+	if c.db == nil {
 		parsed, _ := url.Parse(c.localDSN)
-
-		// find the protocol from the url parsing of the dsn
-		fmt.Printf("opening connection to postgres warehouse over: %s\n", c.localDSN)
 		c.db, err = sql.Open(parsed.Scheme, c.localDSN)
 		if err != nil {
-			return
+			return nil, fmt.Errorf("over ssh tunnel: %w", err)
 		}
-	})
-
-	if err != nil {
-		return nil, fmt.Errorf("opening connection through tunnel: %w", err)
-	}
-
-	if c.db == nil {
-		return nil, fmt.Errorf("no remote database connection available")
 	}
 
 	conn, err := c.db.Driver().Open(c.localDSN)
 	if err != nil {
-		return nil, fmt.Errorf("opening connection to warehouse: %w", err)
+		return nil, fmt.Errorf("opening connection: %w", err)
 	}
 
 	return conn, nil
@@ -141,15 +121,14 @@ func (c *Connector) Driver() driver.Driver {
 // the underlying resources. In case it's unable to close the connection,
 // we need to be able to send the combined errors to layers above.
 func (c *Connector) Close() (resultErr error) {
-	fmt.Println("connector: closing the tunnel")
-
 	var combiner ErrorCombiner
-
-	if err := c.db.Close(); err != nil {
-		combiner.Combine(fmt.Errorf("closing underlying db connection: %w", err))
+	if c.db != nil {
+		if err := c.db.Close(); err != nil {
+			combiner.Combine(fmt.Errorf("closing underlying db connection: %w", err))
+		}
 	}
 
-	if err := c.Tunnel.Close(context.Background()); err != nil {
+	if err := c.tunnel.Close(); err != nil {
 		combiner.Combine(fmt.Errorf("closing underlying tunnel connection: %w", err))
 	}
 
@@ -158,7 +137,7 @@ func (c *Connector) Close() (resultErr error) {
 
 func replaceHostPort(baseurl, newHost, newPort string) string {
 	parsed, _ := url.Parse(baseurl)
-	parsed.Host = fmt.Sprintf("%s:%s", newHost, newPort)
+	parsed.Host = net.JoinHostPort(newHost, newPort)
 	return parsed.String()
 }
 
@@ -175,7 +154,7 @@ func (ec *ErrorCombiner) Combine(err error) {
 func (ec *ErrorCombiner) Error() string {
 	err := ""
 	for _, e := range *ec {
-		err += fmt.Sprintf("%s", e.Error())
+		err += e.Error()
 	}
 	return err
 }

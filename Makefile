@@ -19,4 +19,8 @@ fmt: install-tools ## Formats all go files
 
 .PHONY: test
 test:
-	go test ./...
+	go test ./... -race -count=1
+
+.PHONY: coverage
+coverage:
+	go test -race -count=1 -covermode=atomic -coverprofile=coverage.out ./...
