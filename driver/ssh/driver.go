@@ -47,7 +47,6 @@ func (driver *Driver) OpenConnector(name string) (driver.Connector, error) {
 		return nil, fmt.Errorf("decoding config from dsn: %w", err)
 	}
 
-	fmt.Println(remoteHostDSN)
 	remoteParsed, err := url.Parse(remoteHostDSN)
 	if err != nil {
 		return nil, fmt.Errorf("parsing the remote host dsn: %w", err)
