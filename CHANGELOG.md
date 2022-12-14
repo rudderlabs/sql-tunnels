@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.0...v0.1.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* stop printing sensitive information ([#5](https://github.com/rudderlabs/sql-tunnels/issues/5)) ([ef0b510](https://github.com/rudderlabs/sql-tunnels/commit/ef0b51007b666a7a62e826b36e63b0a0c57044e2))
+
 ## 0.1.0 (2022-12-13)
 
 
