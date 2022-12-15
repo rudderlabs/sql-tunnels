@@ -27,7 +27,6 @@ var (
 )
 
 func init() {
-	fmt.Println("registering the `ssh+sql` driver")
 	sql.Register("sql+ssh", &Driver{})
 }
 
