@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.2](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.1...v0.1.2) (2022-12-22)
+
+
+### Miscellaneous
+
+* introduce dependabot.yml ([970e928](https://github.com/rudderlabs/sql-tunnels/commit/970e92828b9281b630d7c92f0c3241e4ac66103b))
+* remove fmt Print ([#8](https://github.com/rudderlabs/sql-tunnels/issues/8)) ([89f6241](https://github.com/rudderlabs/sql-tunnels/commit/89f6241553175c03f9163d9e5d222602c136081b))
+
 ## [0.1.1](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.0...v0.1.1) (2022-12-14)
 
 
