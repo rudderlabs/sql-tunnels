@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.3](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.2...v0.1.3) (2023-04-20)
+
+
+### Miscellaneous
+
+* **deps:** bump github.com/ClickHouse/clickhouse-go/v2 from 2.4.3 to 2.9.0 ([#28](https://github.com/rudderlabs/sql-tunnels/issues/28)) ([e081979](https://github.com/rudderlabs/sql-tunnels/commit/e081979c365f33c3933698f64b345817841d7bb0))
+* **deps:** bump github.com/stretchr/testify from 1.8.1 to 1.8.2 ([#18](https://github.com/rudderlabs/sql-tunnels/issues/18)) ([d763616](https://github.com/rudderlabs/sql-tunnels/commit/d76361612d9c1849a3858778d668e9342bf64a7e))
+* **deps:** bump go.uber.org/goleak from 1.2.0 to 1.2.1 ([#15](https://github.com/rudderlabs/sql-tunnels/issues/15)) ([7d505b7](https://github.com/rudderlabs/sql-tunnels/commit/7d505b7cfe18c54d104dd79d487f8d3d6201c56b))
+* **deps:** bump golang.org/x/crypto from 0.4.0 to 0.8.0 ([#27](https://github.com/rudderlabs/sql-tunnels/issues/27)) ([cbca284](https://github.com/rudderlabs/sql-tunnels/commit/cbca284d0243fbdbcbf04cd6562e8b166eca00fd))
+
 ## [0.1.2](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.1...v0.1.2) (2022-12-22)
 
 
