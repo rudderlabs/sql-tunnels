@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.9.0
 	github.com/gliderlabs/ssh v0.3.5
-	github.com/go-sql-driver/mysql v1.7.0
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/lib/pq v1.10.7
 	github.com/rudderlabs/compose-test v0.0.0-20221205185752-1290775b38f6
 	github.com/stretchr/testify v1.8.2
