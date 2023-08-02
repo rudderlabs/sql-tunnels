@@ -3,7 +3,7 @@ module github.com/rudderlabs/sql-tunnels
 go 1.19
 
 require (
-	github.com/ClickHouse/clickhouse-go/v2 v2.9.0
+	github.com/ClickHouse/clickhouse-go/v2 v2.12.1
 	github.com/gliderlabs/ssh v0.3.5
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/lib/pq v1.10.9
@@ -29,8 +29,8 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/segmentio/asm v1.2.0 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
-	go.opentelemetry.io/otel v1.13.0 // indirect
-	go.opentelemetry.io/otel/trace v1.13.0 // indirect
+	go.opentelemetry.io/otel v1.16.0 // indirect
+	go.opentelemetry.io/otel/trace v1.16.0 // indirect
 	go.uber.org/goleak v1.2.1
 	golang.org/x/sync v0.3.0
 	golang.org/x/sys v0.9.0 // indirect
