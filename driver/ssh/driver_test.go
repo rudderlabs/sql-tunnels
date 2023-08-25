@@ -13,6 +13,7 @@ import (
 	sshdriver "github.com/rudderlabs/sql-tunnels/driver/ssh"
 	"github.com/stretchr/testify/require"
 
+	"github.com/rudderlabs/compose-test/compose"
 	"github.com/rudderlabs/compose-test/testcompose"
 )
 
@@ -22,7 +23,7 @@ func TestConnections(t *testing.T) {
 	privateKey, err := os.ReadFile("testdata/test_key")
 	require.Nil(t, err)
 
-	c := testcompose.New(t, "./testdata/docker-compose.yaml")
+	c := testcompose.New(t, compose.FilePaths{"./testdata/docker-compose.yaml"})
 
 	t.Cleanup(func() {
 		c.Stop(context.Background())
