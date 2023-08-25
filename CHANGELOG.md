@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.4](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.3...v0.1.4) (2023-08-25)
+
+
+### Miscellaneous
+
+* **deps:** bump github.com/ClickHouse/clickhouse-go/v2 from 2.9.0 to 2.13.3 ([#52](https://github.com/rudderlabs/sql-tunnels/issues/52)) ([9323a7b](https://github.com/rudderlabs/sql-tunnels/commit/9323a7bf53cbc11f00c44037cee9a99defba44e7))
+* **deps:** bump github.com/go-sql-driver/mysql from 1.7.0 to 1.7.1 ([#31](https://github.com/rudderlabs/sql-tunnels/issues/31)) ([38e17d5](https://github.com/rudderlabs/sql-tunnels/commit/38e17d55f4ea0d31091e6d08ff77473461e274da))
+* **deps:** bump github.com/lib/pq from 1.10.7 to 1.10.9 ([#32](https://github.com/rudderlabs/sql-tunnels/issues/32)) ([113fb6a](https://github.com/rudderlabs/sql-tunnels/commit/113fb6a284c831b537d903e9d4da2096e5ab36d2))
+* **deps:** bump github.com/stretchr/testify from 1.8.2 to 1.8.4 ([#43](https://github.com/rudderlabs/sql-tunnels/issues/43)) ([39c7ac4](https://github.com/rudderlabs/sql-tunnels/commit/39c7ac48e37d0d88b5341dd0894c120307bcccd5))
+* **deps:** bump golang.org/x/crypto from 0.10.0 to 0.12.0 ([#49](https://github.com/rudderlabs/sql-tunnels/issues/49)) ([139f39f](https://github.com/rudderlabs/sql-tunnels/commit/139f39f45ee9e63cd374e9cd52bf124b23ae90bb))
+* **deps:** bump golang.org/x/crypto from 0.8.0 to 0.10.0 ([#39](https://github.com/rudderlabs/sql-tunnels/issues/39)) ([93a972b](https://github.com/rudderlabs/sql-tunnels/commit/93a972be12af56089f1794508cf74b080b40a06c))
+* **deps:** bump golang.org/x/sync from 0.1.0 to 0.3.0 ([#40](https://github.com/rudderlabs/sql-tunnels/issues/40)) ([90c3d54](https://github.com/rudderlabs/sql-tunnels/commit/90c3d54458bf6fa82936dc2b28baf01f340d11c3))
+* update rudderlabs/compose-test ([#53](https://github.com/rudderlabs/sql-tunnels/issues/53)) ([70cfbcb](https://github.com/rudderlabs/sql-tunnels/commit/70cfbcb733e066f29a3740a268c2f6ad0a0f8c9a))
+
 ## [0.1.3](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.2...v0.1.3) (2023-04-20)
 
 
