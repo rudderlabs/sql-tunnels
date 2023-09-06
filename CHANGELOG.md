@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.4...v0.1.5) (2023-09-06)
+
+
+### Miscellaneous
+
+* **deps:** bump github.com/ClickHouse/clickhouse-go/v2 from 2.13.3 to 2.13.4 ([#54](https://github.com/rudderlabs/sql-tunnels/issues/54)) ([f1cf7c7](https://github.com/rudderlabs/sql-tunnels/commit/f1cf7c7b8c678612d5929be9ed5586f2c2bbb6af))
+
 ## [0.1.4](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.3...v0.1.4) (2023-08-25)
 
 
