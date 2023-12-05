@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/rudderlabs/compose-test v0.1.3
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/crypto v0.14.0
+	golang.org/x/crypto v0.16.0
 )
 
 require github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
