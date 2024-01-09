@@ -139,10 +139,6 @@ func replaceHostPort(baseurl, newHost, newPort string) string {
 	return parsed.String()
 }
 
-func CombineError(base, err error) (updated error) {
-	return fmt.Errorf("%v:%v", base, err)
-}
-
 type ErrorCombiner []error
 
 func (ec *ErrorCombiner) Combine(err error) {
