@@ -37,7 +37,7 @@ type SSH struct {
 func ListenAndForward(config *SSHConfig) (*SSH, error) {
 	singer, err := ssh.ParsePrivateKey(config.PrivateKey)
 	if err != nil {
-		return nil, fmt.Errorf("parsing private key: %s", err.Error())
+		return nil, fmt.Errorf("parsing private key: %w", err)
 	}
 
 	endpoint := net.JoinHostPort(config.Host, strconv.Itoa(config.Port))
