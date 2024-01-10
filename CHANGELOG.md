@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.6](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.5...v0.1.6) (2024-01-10)
+
+
+### Bug Fixes
+
+* invalid dsn format during decode ([#77](https://github.com/rudderlabs/sql-tunnels/issues/77)) ([f7bc22d](https://github.com/rudderlabs/sql-tunnels/commit/f7bc22d1c1c01657e4ceee9ec97368e2b161bb6e))
+
+
+### Miscellaneous
+
+* **deps:** bump github.com/ClickHouse/clickhouse-go/v2 from 2.13.4 to 2.14.3 ([#63](https://github.com/rudderlabs/sql-tunnels/issues/63)) ([c706eec](https://github.com/rudderlabs/sql-tunnels/commit/c706eecaa14356619cc2c20d8fd81aa06bbb6581))
+* **deps:** bump github.com/ClickHouse/clickhouse-go/v2 from 2.14.3 to 2.16.0 ([#70](https://github.com/rudderlabs/sql-tunnels/issues/70)) ([c7815ff](https://github.com/rudderlabs/sql-tunnels/commit/c7815ffebbbcc13baa1bd120b3665432368b3407))
+* **deps:** bump github.com/rudderlabs/compose-test from 0.1.2 to 0.1.3 ([#57](https://github.com/rudderlabs/sql-tunnels/issues/57)) ([011b6c9](https://github.com/rudderlabs/sql-tunnels/commit/011b6c9e59647788f6ba6be4eee1e0c8f4c98c98))
+* **deps:** bump golang.org/x/crypto from 0.12.0 to 0.14.0 ([#62](https://github.com/rudderlabs/sql-tunnels/issues/62)) ([f0acada](https://github.com/rudderlabs/sql-tunnels/commit/f0acada2ca41f295df8936bf4fd8574b849e90b4))
+* **deps:** bump golang.org/x/crypto from 0.14.0 to 0.16.0 ([#69](https://github.com/rudderlabs/sql-tunnels/issues/69)) ([9e3c04b](https://github.com/rudderlabs/sql-tunnels/commit/9e3c04b3ad5e40727308dfcf34fc3175d9105b75))
+* **deps:** bump golang.org/x/sync from 0.3.0 to 0.4.0 ([#61](https://github.com/rudderlabs/sql-tunnels/issues/61)) ([7a5b5cd](https://github.com/rudderlabs/sql-tunnels/commit/7a5b5cdede9660ca03fc9205d9d75d9748d60c0c))
+* **deps:** bump golang.org/x/sync from 0.4.0 to 0.5.0 ([#67](https://github.com/rudderlabs/sql-tunnels/issues/67)) ([29c197e](https://github.com/rudderlabs/sql-tunnels/commit/29c197ecb2233f8ccad16f8cfd7c8db25fec8355))
+
 ## [0.1.5](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.4...v0.1.5) (2023-09-06)
 
 
