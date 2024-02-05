@@ -1,6 +1,7 @@
 package ssh
 
 import (
+	"errors"
 	"fmt"
 	"net/url"
 	"strconv"
@@ -17,7 +18,7 @@ type Config struct {
 func (conf *Config) EncodeWithDSN(base string) (string, error) {
 	parsed, err := url.Parse(base)
 	if err != nil {
-		return "", fmt.Errorf("url parsing the base url: %s, %s", base, err.Error())
+		return "", fmt.Errorf("cannot parse DSN during encode: %w", err)
 	}
 
 	values := parsed.Query()
@@ -27,6 +28,10 @@ func (conf *Config) EncodeWithDSN(base string) (string, error) {
 	updatedBase := parsed.String()
 	split := strings.Split(updatedBase, "://")
 
+	if len(split) != 2 {
+		return "", fmt.Errorf("invalid DSN format during encode: splitting by :// gives unexpected results")
+	}
+
 	return fmt.Sprintf(
 		"%s://%s@%s:%d/%s", split[0], conf.User, conf.Host, conf.Port, split[1]), nil
 }
@@ -34,7 +39,7 @@ func (conf *Config) EncodeWithDSN(base string) (string, error) {
 func (conf *Config) DecodeFromDSN(encodedDSN string) (dsn string, err error) {
 	parsed, err := url.Parse(encodedDSN)
 	if err != nil {
-		return "", fmt.Errorf("parsing the encoded dsn: %s, %s", encodedDSN, err.Error())
+		return "", fmt.Errorf("cannot parse DSN during decode: %w", err)
 	}
 
 	conf.User = parsed.User.Username()
@@ -47,14 +52,16 @@ func (conf *Config) DecodeFromDSN(encodedDSN string) (dsn string, err error) {
 
 	parsed.RawQuery = values.Encode()
 
-	// remove the middle information of
-	// scheme://ssh_user:ssh_password@ssh_host:ssh_port/
-	splitted := strings.Split(parsed.String(), "://")
-	idx := strings.Index(splitted[1], "/")
-
-	if idx == -1 {
-		return "", fmt.Errorf("fetching index of / to start reading the warehouse dsn: %s", err.Error())
+	// remove the middle information of scheme://ssh_user:ssh_password@ssh_host:ssh_port/
+	split := strings.Split(parsed.String(), "://")
+	if len(split) != 2 {
+		return "", fmt.Errorf("invalid DSN format during decode: splitting by :// gives unexpected results")
 	}
 
-	return fmt.Sprintf("%s://%s", splitted[0], splitted[1][idx+1:]), nil
+	idx := strings.Index(split[1], "/")
+	if idx == -1 {
+		return "", errors.New("invalid DSN format: missing / after ssh_port")
+	}
+
+	return fmt.Sprintf("%s://%s", split[0], split[1][idx+1:]), nil
 }
