@@ -7,11 +7,11 @@ help: ## Show the available commands
 .PHONY: install-tools
 install-tools: ## install necessary tools
 	go install mvdan.cc/gofumpt@latest
+	bash ./scripts/install-golangci-lint.sh v1.55.2
 
-.PHONY: lint 
+.PHONY: lint
 lint: fmt ## Run linters on all go files
-	docker run --rm -v $(shell pwd):/app:ro -w /app golangci/golangci-lint:v1.49.0 bash -e -c \
-		'golangci-lint run -v --timeout 5m'
+	golangci-lint run -v --timeout 5m
 
 .PHONY: fmt 
 fmt: install-tools ## Formats all go files
