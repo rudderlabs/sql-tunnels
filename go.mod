@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.3
 
 require (
-	github.com/ClickHouse/clickhouse-go/v2 v2.19.0
+	github.com/ClickHouse/clickhouse-go/v2 v2.20.0
 	github.com/gliderlabs/ssh v0.3.6
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/lib/pq v1.10.9
