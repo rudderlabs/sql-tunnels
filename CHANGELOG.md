@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.7](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.6...v0.1.7) (2024-03-05)
+
+
+### Miscellaneous
+
+* **deps:** bump codecov/codecov-action from 3 to 4 ([#82](https://github.com/rudderlabs/sql-tunnels/issues/82)) ([b3f3723](https://github.com/rudderlabs/sql-tunnels/commit/b3f3723095960fa78769e610b2cac3e15705ffd3))
+* **deps:** bump github.com/ClickHouse/clickhouse-go/v2 from 2.19.0 to 2.20.0 ([#84](https://github.com/rudderlabs/sql-tunnels/issues/84)) ([ab7de98](https://github.com/rudderlabs/sql-tunnels/commit/ab7de98587cd883d2b43254f3368770858f9407b))
+* **deps:** bump github.com/gliderlabs/ssh from 0.3.5 to 0.3.6 ([#72](https://github.com/rudderlabs/sql-tunnels/issues/72)) ([302ec3d](https://github.com/rudderlabs/sql-tunnels/commit/302ec3d5cf046d62723731e7cbd6fc9cbf56d0f5))
+* **deps:** bump github.com/stretchr/testify from 1.8.4 to 1.9.0 ([#85](https://github.com/rudderlabs/sql-tunnels/issues/85)) ([a508fd5](https://github.com/rudderlabs/sql-tunnels/commit/a508fd5a02d1a3f600bf520d91ea9a9ac26d86b5))
+* **deps:** bump golang.org/x/crypto from 0.16.0 to 0.18.0 ([#76](https://github.com/rudderlabs/sql-tunnels/issues/76)) ([88c4d67](https://github.com/rudderlabs/sql-tunnels/commit/88c4d67b3cd054bc9baa89ba05de8b189c193a35))
+* **deps:** bump golang.org/x/sync from 0.5.0 to 0.6.0 ([#75](https://github.com/rudderlabs/sql-tunnels/issues/75)) ([0d2b742](https://github.com/rudderlabs/sql-tunnels/commit/0d2b7421a8daf42bdd2fbfeadace30911bcc28f2))
+* **deps:** bump google-github-actions/release-please-action from 3 to 4 ([#83](https://github.com/rudderlabs/sql-tunnels/issues/83)) ([e25cf9e](https://github.com/rudderlabs/sql-tunnels/commit/e25cf9e5d929267d2d5123131078f3e6a8e73966))
+* upgrade dependencies ([#81](https://github.com/rudderlabs/sql-tunnels/issues/81)) ([bd10580](https://github.com/rudderlabs/sql-tunnels/commit/bd105807f64902efe627a2ced9b8f0812aa82827))
+
 ## [0.1.6](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.5...v0.1.6) (2024-01-10)
 
 
