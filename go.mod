@@ -7,7 +7,7 @@ toolchain go1.21.3
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.20.0
 	github.com/gliderlabs/ssh v0.3.6
-	github.com/go-sql-driver/mysql v1.7.1
+	github.com/go-sql-driver/mysql v1.8.0
 	github.com/lib/pq v1.10.9
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
 	github.com/rudderlabs/compose-test v0.1.3
@@ -18,6 +18,7 @@ require (
 )
 
 require (
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/ClickHouse/ch-go v0.61.3 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
