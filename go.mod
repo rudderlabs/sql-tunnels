@@ -6,7 +6,7 @@ toolchain go1.21.3
 
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.23.0
-	github.com/gliderlabs/ssh v0.3.6
+	github.com/gliderlabs/ssh v0.3.7
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/lib/pq v1.10.9
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
