@@ -43,8 +43,7 @@ services:
       - CLICKHOUSE_PASSWORD=clickhouse
       - CLICKHOUSE_USER=clickhouse
     healthcheck:
-      test: wget -nv -O- 'http://localhost:8123/ping' || exit 1
-      # test:  ["CMD", "nc", "-zv", "127.0.0.1", "9000"]
+      test: wget --no-verbose --tries=1 --spider http://0.0.0.0:8123/ping || exit 1
       interval: 1s
       timeout: 5s
       retries: 30
