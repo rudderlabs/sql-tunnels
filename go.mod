@@ -3,7 +3,7 @@ module github.com/rudderlabs/sql-tunnels
 go 1.22.5
 
 require (
-	github.com/ClickHouse/clickhouse-go/v2 v2.28.1
+	github.com/ClickHouse/clickhouse-go/v2 v2.29.0
 	github.com/gliderlabs/ssh v0.3.7
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/lib/pq v1.10.9
