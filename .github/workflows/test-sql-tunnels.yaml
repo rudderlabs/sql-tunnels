@@ -25,7 +25,7 @@ jobs:
       - run: go mod download # Not required, used to segregate module download vs test times
       - run: make coverage
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
 
   linters:
     name: "sql-tunnels linters"
