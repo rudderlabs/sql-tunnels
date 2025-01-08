@@ -1,18 +1,16 @@
 run:
-  go: '1.21'
 
 linters:
   enable:
-    - deadcode
     - errcheck
     - gosimple
     - govet
     - ineffassign
     - staticcheck
-    - structcheck
     - typecheck
     - unused
-    - varcheck
+    - unparam
+    - unconvert
     - bodyclose
     - decorder
     - makezero
@@ -24,6 +22,7 @@ linters:
     - unparam
     - misspell
     - unconvert
+    - depguard
 
 issues:
   exclude-use-default: true
@@ -31,3 +30,12 @@ issues:
   max-issues-per-linter: 50
   max-same-issues: 10
   new: false
+
+linters-settings:
+  depguard:
+    rules:
+      main:
+        files:
+          - .*
+        allow:
+          - .*
