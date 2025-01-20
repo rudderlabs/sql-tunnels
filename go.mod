@@ -3,7 +3,7 @@ module github.com/rudderlabs/sql-tunnels
 go 1.23.4
 
 require (
-	github.com/ClickHouse/clickhouse-go/v2 v2.28.1
+	github.com/ClickHouse/clickhouse-go/v2 v2.30.1
 	github.com/gliderlabs/ssh v0.3.8
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/lib/pq v1.10.9
@@ -17,14 +17,14 @@ require (
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
-	github.com/ClickHouse/ch-go v0.62.0 // indirect
-	github.com/andybalholm/brotli v1.1.0 // indirect
+	github.com/ClickHouse/ch-go v0.63.1 // indirect
+	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-faster/city v1.0.1 // indirect
 	github.com/go-faster/errors v0.7.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/klauspost/compress v1.17.9 // indirect
+	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/paulmach/orb v0.11.1 // indirect
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
