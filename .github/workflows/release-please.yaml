@@ -4,8 +4,14 @@ on:
       - "release/*"
       - "main"
 name: release-please
+permissions:
+  contents: read
+
 jobs:
   release-please:
+    permissions:
+      contents: write  # for google-github-actions/release-please-action to create release commit
+      pull-requests: write  # for google-github-actions/release-please-action to create release PR
     runs-on: ubuntu-latest
     steps:
       - name: Harden the runner (Audit all outbound calls)
