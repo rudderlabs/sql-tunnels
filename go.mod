@@ -11,7 +11,7 @@ require (
 	github.com/rudderlabs/compose-test v0.1.5
 	github.com/stretchr/testify v1.11.1
 	go.uber.org/goleak v1.3.0
-	golang.org/x/crypto v0.38.0
+	golang.org/x/crypto v0.53.0
 	golang.org/x/sync v0.14.0
 )
 
@@ -32,6 +32,6 @@ require (
 	github.com/shopspring/decimal v1.4.0 // indirect
 	go.opentelemetry.io/otel v1.36.0 // indirect
 	go.opentelemetry.io/otel/trace v1.36.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/sys v0.46.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
