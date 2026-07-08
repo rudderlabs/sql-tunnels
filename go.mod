@@ -1,6 +1,6 @@
 module github.com/rudderlabs/sql-tunnels
 
-go 1.23.4
+go 1.25.0
 
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.36.0
@@ -8,10 +8,10 @@ require (
 	github.com/go-sql-driver/mysql v1.9.2
 	github.com/lib/pq v1.10.9
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
-	github.com/rudderlabs/compose-test v0.1.3
-	github.com/stretchr/testify v1.10.0
+	github.com/rudderlabs/compose-test v0.1.5
+	github.com/stretchr/testify v1.11.1
 	go.uber.org/goleak v1.3.0
-	golang.org/x/crypto v0.38.0
+	golang.org/x/crypto v0.53.0
 	golang.org/x/sync v0.14.0
 )
 
@@ -32,6 +32,6 @@ require (
 	github.com/shopspring/decimal v1.4.0 // indirect
 	go.opentelemetry.io/otel v1.36.0 // indirect
 	go.opentelemetry.io/otel/trace v1.36.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/sys v0.46.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
