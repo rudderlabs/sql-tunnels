@@ -33,7 +33,8 @@ func (conf *Config) EncodeWithDSN(base string) (string, error) {
 	}
 
 	return fmt.Sprintf(
-		"%s://%s@%s:%d/%s", split[0], conf.User, conf.Host, conf.Port, split[1]), nil
+		"%s://%s@%s:%d/%s", split[0], conf.User, conf.Host, conf.Port, split[1],
+	), nil
 }
 
 func (conf *Config) DecodeFromDSN(encodedDSN string) (dsn string, err error) {
