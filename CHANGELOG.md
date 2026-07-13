@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.8](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.7...v0.1.8) (2026-07-13)
+
+
+### Miscellaneous
+
+* apply security best practices from step security ([#147](https://github.com/rudderlabs/sql-tunnels/issues/147)) ([e6ddfbc](https://github.com/rudderlabs/sql-tunnels/commit/e6ddfbc1b2531c7184f159694c1f175014484b37))
+* apply security best practices from step security ([#148](https://github.com/rudderlabs/sql-tunnels/issues/148)) ([3e2cde4](https://github.com/rudderlabs/sql-tunnels/commit/3e2cde4e253a5670ff7469815db58f12fe575c50))
+* **ci:** downgrade release-please-action to v3.7.13 (SEC-367) ([#159](https://github.com/rudderlabs/sql-tunnels/issues/159)) ([ad60223](https://github.com/rudderlabs/sql-tunnels/commit/ad602238de64f997808d9b169a0b4a2d68b28488))
+* deps upgrade ([#115](https://github.com/rudderlabs/sql-tunnels/issues/115)) ([0116fae](https://github.com/rudderlabs/sql-tunnels/commit/0116faeaa711780d35f0a6c18fa15d94a7f6459c))
+* **deps:** bump actions/checkout from 4.3.0 to 5.0.0 ([#152](https://github.com/rudderlabs/sql-tunnels/issues/152)) ([56e9884](https://github.com/rudderlabs/sql-tunnels/commit/56e9884f54f49a4138e171caba10931e37416362))
+* **deps:** bump amannn/action-semantic-pull-request from 5 to 6 ([#144](https://github.com/rudderlabs/sql-tunnels/issues/144)) ([81decd2](https://github.com/rudderlabs/sql-tunnels/commit/81decd2b15afa5006ac6db45daaa79c242a783a7))
+* **deps:** bump codecov/codecov-action from 4.6.0 to 5.5.1 ([#150](https://github.com/rudderlabs/sql-tunnels/issues/150)) ([0179896](https://github.com/rudderlabs/sql-tunnels/commit/017989680123ddb3a499633cf21fa4d6cb6cf80a))
+* **deps:** bump compose-test to v0.1.5 to remediate pgx CVE-2026-33815 ([#158](https://github.com/rudderlabs/sql-tunnels/issues/158)) ([575c410](https://github.com/rudderlabs/sql-tunnels/commit/575c410f90244b6835e4777aef44aa9e7dd65829))
+* **deps:** bump filippo.io/edwards25519 from 1.1.0 to 1.1.1 ([#161](https://github.com/rudderlabs/sql-tunnels/issues/161)) ([f51e841](https://github.com/rudderlabs/sql-tunnels/commit/f51e8418c18d40e7a97943f2b5d36d69e67109e2))
+* **deps:** bump the all group across 1 directory with 4 updates ([#136](https://github.com/rudderlabs/sql-tunnels/issues/136)) ([fdefa00](https://github.com/rudderlabs/sql-tunnels/commit/fdefa00dbb8b7903be60d678e082ecdaedb8aada))
+* release 0.1.7 ([#78](https://github.com/rudderlabs/sql-tunnels/issues/78)) ([d19ddbe](https://github.com/rudderlabs/sql-tunnels/commit/d19ddbec25ca2ab734d643a9778ffa36254c644d))
+* upgrade dependencies ([#126](https://github.com/rudderlabs/sql-tunnels/issues/126)) ([858f137](https://github.com/rudderlabs/sql-tunnels/commit/858f137c5414c734894313dc05f0599fd2de54ea))
+* **vuln:** pin and bump action refs (SEC-171) ([#155](https://github.com/rudderlabs/sql-tunnels/issues/155)) ([5bcaad9](https://github.com/rudderlabs/sql-tunnels/commit/5bcaad969bf7fe7d10275900ff298066ef889019))
+* **vuln:** scope workflow permissions to least privilege (SEC-167) ([#157](https://github.com/rudderlabs/sql-tunnels/issues/157)) ([6c837ee](https://github.com/rudderlabs/sql-tunnels/commit/6c837ee324d9d5025fca3f1108001c5d58478c4f))
+* **vuln:** zizmor --fix=all findings (SEC-199) ([#156](https://github.com/rudderlabs/sql-tunnels/issues/156)) ([569e40d](https://github.com/rudderlabs/sql-tunnels/commit/569e40d97002b28417f2580b34e0dd043fa7b09d))
+
 ## [0.1.7](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.6...v0.1.7) (2024-03-05)
 
 
