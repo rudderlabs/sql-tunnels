@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.9](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.8...v0.1.9) (2026-07-22)
+
+
+### Miscellaneous
+
+* **deps:** bump actions/setup-go from 5.5.0 to 6.5.0 ([#164](https://github.com/rudderlabs/sql-tunnels/issues/164)) ([bc05918](https://github.com/rudderlabs/sql-tunnels/commit/bc05918f4f4e70676b736a11651004c14a51eeb2))
+* **deps:** bump codecov/codecov-action from 5.5.1 to 7.0.0 ([#165](https://github.com/rudderlabs/sql-tunnels/issues/165)) ([3aaac59](https://github.com/rudderlabs/sql-tunnels/commit/3aaac59d61fee4b338793a70dcbdd667c84f9c9b))
+* **deps:** bump go.opentelemetry.io/otel from 1.36.0 to 1.41.0 ([#160](https://github.com/rudderlabs/sql-tunnels/issues/160)) ([23e0920](https://github.com/rudderlabs/sql-tunnels/commit/23e0920741b3fb7ddd3cf718d27ba4347a924bf9))
+* **deps:** bump golang/govulncheck-action from 1.0.4 to 1.1.0 ([#167](https://github.com/rudderlabs/sql-tunnels/issues/167)) ([88e2d22](https://github.com/rudderlabs/sql-tunnels/commit/88e2d2224a9a8b97a68a62904889f3fbac6b8ffe))
+* **deps:** bump golangci/golangci-lint-action from 8.0.0 to 9.3.0 ([#166](https://github.com/rudderlabs/sql-tunnels/issues/166)) ([f5b9327](https://github.com/rudderlabs/sql-tunnels/commit/f5b932723570aea331f1d368c1e9880ca3b7eed9))
+* **deps:** bump step-security/harden-runner from 2.16.0 to 2.20.0 ([#168](https://github.com/rudderlabs/sql-tunnels/issues/168)) ([68a4adb](https://github.com/rudderlabs/sql-tunnels/commit/68a4adb4783d30af1591f5c06c60354e8e8dd37a))
+* **deps:** bump the all group across 1 directory with 5 updates ([#163](https://github.com/rudderlabs/sql-tunnels/issues/163)) ([a6e7c23](https://github.com/rudderlabs/sql-tunnels/commit/a6e7c230ce4ea4139ff02195fc8b86790486a69a))
+
 ## [0.1.8](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.7...v0.1.8) (2026-07-13)
 
 
