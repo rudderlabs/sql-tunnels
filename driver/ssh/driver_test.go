@@ -2,46 +2,93 @@ package ssh_test
 
 import (
 	"context"
+	"crypto/rand"
 	"database/sql"
+	"net"
+	"net/url"
 	"os"
+	"path/filepath"
 	"testing"
 	"time"
 
 	_ "github.com/ClickHouse/clickhouse-go/v2"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
-	sshdriver "github.com/rudderlabs/sql-tunnels/driver/ssh"
+	"github.com/ory/dockertest/v3"
 	"github.com/stretchr/testify/require"
 
-	"github.com/rudderlabs/compose-test/compose"
-	"github.com/rudderlabs/compose-test/testcompose"
+	"github.com/rudderlabs/rudder-go-kit/testhelper/docker/resource/clickhouse"
+	"github.com/rudderlabs/rudder-go-kit/testhelper/docker/resource/postgres"
+	"github.com/rudderlabs/rudder-go-kit/testhelper/docker/resource/sshserver"
+	sshdriver "github.com/rudderlabs/sql-tunnels/driver/ssh"
 )
 
 func TestConnections(t *testing.T) {
 	t.Parallel()
 
 	privateKey, err := os.ReadFile("testdata/test_key")
-	require.Nil(t, err)
+	require.NoError(t, err)
+	publicKeyPath, err := filepath.Abs("testdata/test_key.pub")
+	require.NoError(t, err)
 
-	c := testcompose.New(t, compose.FilePaths{"./testdata/docker-compose.yaml"})
+	pool, err := dockertest.NewPool("")
+	require.NoError(t, err)
 
+	// Registered before the resources, so it runs after their containers are purged.
+	network, err := pool.CreateNetwork("sql-tunnels-ssh-" + rand.Text())
+	require.NoError(t, err)
 	t.Cleanup(func() {
-		c.Stop(context.Background())
+		if err := network.Close(); err != nil {
+			t.Logf("removing docker network: %v", err)
+		}
 	})
-	c.Start(context.Background())
+
+	pg, err := postgres.Setup(pool, t, postgres.WithNetwork(network.Network))
+	require.NoError(t, err)
+
+	ch, err := clickhouse.Setup(pool, t,
+		clickhouse.WithNetwork(network.Network),
+		clickhouse.WithUser("clickhouse"),
+		clickhouse.WithPassword("clickhouse"),
+		clickhouse.WithDatabase("db"),
+	)
+	require.NoError(t, err)
+
+	// Without its own network, sshserver creates one with a fixed name that parallel tests share.
+	sshServer, err := sshserver.Setup(pool, t,
+		sshserver.WithPublicKeyPath(publicKeyPath),
+		sshserver.WithCredentials("linuxserver.io", ""),
+		sshserver.WithDockerNetwork(network.Network),
+	)
+	require.NoError(t, err)
 
 	config := sshdriver.Config{
-		User:       c.Env("openssh-server", "USER_NAME"),
-		Host:       "0.0.0.0",
-		Port:       c.Port("openssh-server", 2222),
+		User:       "linuxserver.io",
+		Host:       sshServer.Host,
+		Port:       sshServer.Port,
 		PrivateKey: privateKey,
 	}
+
+	// The bastion resolves these hostnames on the shared network and dials the container ports.
+	postgresDSN := (&url.URL{
+		Scheme:   "postgres",
+		User:     url.UserPassword(pg.User, pg.Password),
+		Host:     net.JoinHostPort(pg.ContainerName, "5432"),
+		Path:     "/" + pg.Database,
+		RawQuery: "sslmode=disable",
+	}).String()
+	clickhouseDSN := (&url.URL{
+		Scheme: "clickhouse",
+		User:   url.UserPassword(ch.User, ch.Password),
+		Host:   net.JoinHostPort(ch.Hostname, "9000"),
+		Path:   "/" + ch.Database,
+	}).String()
 
 	t.Run("postgres", func(t *testing.T) {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 		defer cancel()
 
-		encoded, err := config.EncodeWithDSN("postgres://postgres:postgres@db_postgres:5432/postgres?sslmode=disable")
+		encoded, err := config.EncodeWithDSN(postgresDSN)
 		require.NoError(t, err)
 
 		db, err := sql.Open("sql+ssh", encoded)
@@ -66,15 +113,11 @@ func TestConnections(t *testing.T) {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 		defer cancel()
 
-		encoded, err := config.EncodeWithDSN("clickhouse://clickhouse:clickhouse@db_clickhouse:9000/db?skip_verify=false")
+		encoded, err := config.EncodeWithDSN(clickhouseDSN)
 		require.NoError(t, err)
 
 		db, err := sql.Open("sql+ssh", encoded)
 		require.NoError(t, err)
-
-		require.Eventually(t, func() bool {
-			return db.PingContext(ctx) == nil
-		}, time.Minute, time.Second)
 
 		err = db.PingContext(ctx)
 		require.NoError(t, err)
