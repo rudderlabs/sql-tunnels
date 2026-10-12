@@ -20,6 +20,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      # v1.1.0 fails at workflow startup; keep the v1.0.4 pin.
+      - dependency-name: "golang/govulncheck-action"
+        versions: [">= 1.1.0"]
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
