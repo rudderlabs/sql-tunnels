@@ -5,9 +5,9 @@ go 1.27.1
 toolchain go1.27.2
 
 require (
-	github.com/ClickHouse/clickhouse-go/v2 v2.48.0
+	github.com/ClickHouse/clickhouse-go/v2 v2.49.0
 	github.com/gliderlabs/ssh v0.3.8
-	github.com/go-sql-driver/mysql v1.10.0
+	github.com/go-sql-driver/mysql v1.10.1
 	github.com/lib/pq v1.12.3
 	github.com/ory/dockertest/v3 v3.12.0
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
@@ -15,7 +15,7 @@ require (
 	github.com/stretchr/testify v1.12.1
 	go.uber.org/goleak v1.3.0
 	golang.org/x/crypto v0.57.0
-	golang.org/x/sync v0.23.0
+	golang.org/x/sync v0.24.0
 )
 
 require (
@@ -25,7 +25,7 @@ require (
 	github.com/ClickHouse/ch-go v0.74.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 // indirect
-	github.com/andybalholm/brotli v1.2.2 // indirect
+	github.com/andybalholm/brotli v1.2.6 // indirect
 	github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -48,8 +48,8 @@ require (
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/klauspost/compress v1.20.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
-	github.com/moby/moby/api v1.55.0 // indirect
-	github.com/moby/moby/client v0.5.1 // indirect
+	github.com/moby/moby/api v1.56.1 // indirect
+	github.com/moby/moby/client v0.6.0 // indirect
 	github.com/moby/sys/user v0.4.1 // indirect
 	github.com/moby/term v0.5.2 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
