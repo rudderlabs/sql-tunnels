@@ -113,6 +113,12 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			RemotePort: port,
 		}
 
+		// The SSH server starts its per-connection goroutines after the client handshake returns, so a
+		// snapshot taken after ListenAndForward races them. Check after the tunnel closes instead:
+		// cleanups run last-in first-out, so this one runs after the tunnel and connection close.
+		ignore := goleak.IgnoreCurrent()
+		t.Cleanup(func() { goleak.VerifyNone(t, ignore) })
+
 		sshTunnel, err := tunnel.ListenAndForward(&config)
 		require.NoError(t, err)
 
@@ -120,8 +126,6 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			err := sshTunnel.Close()
 			require.NoError(t, err)
 		})
-
-		defer goleak.VerifyNone(t, goleak.IgnoreCurrent())
 
 		conn, err := net.Dial("tcp", sshTunnel.Addr())
 		require.NoError(t, err)
