@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"strings"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -134,7 +135,11 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 
 		buf := make([]byte, 5)
 		_, err = conn.Read(buf)
-		require.ErrorContains(t, err, "read: connection reset by peer")
+		// The tunnel closes the local connection when the remote dial fails. Depending on timing, the
+		// close reaches the reader as a reset or as a clean EOF.
+		require.Error(t, err)
+		require.True(t, errors.Is(err, io.EOF) || strings.Contains(err.Error(), "connection reset by peer"),
+			"expected EOF or connection reset, got %v", err)
 
 		err = sshTunnel.Error()
 		require.ErrorContains(t, err, "ssh: rejected: connect failed")
