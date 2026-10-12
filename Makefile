@@ -1,7 +1,7 @@
 default: help
 
 GO          := go
-GOLANG_CI	:= github.com/golangci/golangci-lint/cmd/golangci-lint@v1.57.1
+GOLANGCI	:= github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.14.0
 GOFUMPT		:= mvdan.cc/gofumpt@latest
 
 .PHONY: help
