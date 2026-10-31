@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.9](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.8...v0.1.9) (2026-10-31)
+
+
+### Miscellaneous
+
+* bump andybalholm/brotli to v1.2.7 ([#187](https://github.com/rudderlabs/sql-tunnels/issues/187)) ([f86502a](https://github.com/rudderlabs/sql-tunnels/commit/f86502a2e0bc92575ad31e739cac965040dc55e4))
+* **ci:** move the PR title check to check-pr-title v2.0.3 ([#189](https://github.com/rudderlabs/sql-tunnels/issues/189)) ([f547c4c](https://github.com/rudderlabs/sql-tunnels/commit/f547c4c50957661a058331668a43680dcc943504))
+* **ci:** run govulncheck with go run instead of the tag-calling action ([#188](https://github.com/rudderlabs/sql-tunnels/issues/188)) ([ae8b0b1](https://github.com/rudderlabs/sql-tunnels/commit/ae8b0b141e907ec0c7829e08faa2e29093f7c006))
+* **deps:** bump actions/setup-go from 5.5.0 to 6.5.0 ([#164](https://github.com/rudderlabs/sql-tunnels/issues/164)) ([bc05918](https://github.com/rudderlabs/sql-tunnels/commit/bc05918f4f4e70676b736a11651004c14a51eeb2))
+* **deps:** bump codecov/codecov-action from 5.5.1 to 7.0.0 ([#165](https://github.com/rudderlabs/sql-tunnels/issues/165)) ([3aaac59](https://github.com/rudderlabs/sql-tunnels/commit/3aaac59d61fee4b338793a70dcbdd667c84f9c9b))
+* **deps:** bump go.opentelemetry.io/otel from 1.36.0 to 1.41.0 ([#160](https://github.com/rudderlabs/sql-tunnels/issues/160)) ([23e0920](https://github.com/rudderlabs/sql-tunnels/commit/23e0920741b3fb7ddd3cf718d27ba4347a924bf9))
+* **deps:** bump golang/govulncheck-action from 1.0.4 to 1.1.0 ([#167](https://github.com/rudderlabs/sql-tunnels/issues/167)) ([88e2d22](https://github.com/rudderlabs/sql-tunnels/commit/88e2d2224a9a8b97a68a62904889f3fbac6b8ffe))
+* **deps:** bump golangci/golangci-lint-action from 8.0.0 to 9.3.0 ([#166](https://github.com/rudderlabs/sql-tunnels/issues/166)) ([f5b9327](https://github.com/rudderlabs/sql-tunnels/commit/f5b932723570aea331f1d368c1e9880ca3b7eed9))
+* **deps:** bump step-security/harden-runner from 2.16.0 to 2.20.0 ([#168](https://github.com/rudderlabs/sql-tunnels/issues/168)) ([68a4adb](https://github.com/rudderlabs/sql-tunnels/commit/68a4adb4783d30af1591f5c06c60354e8e8dd37a))
+* **deps:** bump the all group across 1 directory with 5 updates ([#163](https://github.com/rudderlabs/sql-tunnels/issues/163)) ([a6e7c23](https://github.com/rudderlabs/sql-tunnels/commit/a6e7c230ce4ea4139ff02195fc8b86790486a69a))
+* **test:** run ssh driver tests on go-kit docker resources ([#181](https://github.com/rudderlabs/sql-tunnels/issues/181)) ([066aad2](https://github.com/rudderlabs/sql-tunnels/commit/066aad277121fcbb80e0cb17c83ad4f2b8a15489))
+
 ## [0.1.8](https://github.com/rudderlabs/sql-tunnels/compare/v0.1.7...v0.1.8) (2026-07-13)
 
 
