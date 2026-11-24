@@ -166,6 +166,11 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			RemotePort: echo.Addr().(*net.TCPAddr).Port,
 		}
 
+		// Snapshot before the tunnel opens and check after it closes, for the same reason as in the
+		// "remote endpoint not available" test.
+		ignore := goleak.IgnoreCurrent()
+		t.Cleanup(func() { goleak.VerifyNone(t, ignore) })
+
 		sshTunnel, err := tunnel.ListenAndForward(&config)
 		require.NoError(t, err)
 
@@ -174,7 +179,6 @@ func Test_SSH_ListenAndForward(t *testing.T) {
 			require.NoError(t, err)
 		})
 
-		defer goleak.VerifyNone(t, goleak.IgnoreCurrent())
 		t.Log("multiple connections successfully forwarded and closed")
 
 		for i := 1; i < 10; i++ {
