@@ -2,6 +2,8 @@ module github.com/rudderlabs/sql-tunnels
 
 go 1.27.3
 
+toolchain go1.27.4
+
 require (
 	github.com/ClickHouse/clickhouse-go/v2 v2.50.0
 	github.com/gliderlabs/ssh v0.3.8
@@ -9,7 +11,7 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/ory/dockertest/v3 v3.12.0
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
-	github.com/rudderlabs/rudder-go-kit v0.85.0
+	github.com/rudderlabs/rudder-go-kit v0.86.0
 	github.com/stretchr/testify v1.12.1
 	go.uber.org/goleak v1.3.0
 	golang.org/x/crypto v0.58.0
